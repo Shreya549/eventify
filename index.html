@@ -125,22 +125,24 @@
               if (!when) {
                 when = event.start.date;
               }
-              alert(when)
               appendPre(event.summary + ' (' + when + ')')
-              var myDate = new Date(when);
-              var date = myDate.getTime();
+              // var myDate = new Date(when);
+              // var date = myDate.getTime();
               arr.push({
-                time: date,
-                event: event
+                  event : event
               })
-           
             }
             
-               localStorage.setItem("arr", JSON.stringify(arr))
-            //let arr2 = localStorage.getItem("arr")
-            //let t = JSON.parse(arr2 || [])
-            //console.log(t[0].event)
-      
+            localStorage.setItem("arr",JSON.stringify(arr))
+            // localStorage.setItem("data",JSON.stringify(events))
+            // localStorage.setItem("data",JSON.stringify(event))
+            let arr2 = localStorage.getItem("arr")
+            let t = JSON.parse(arr2 || [])
+            for(i = 0; i < events.length; i++)
+            {
+              console.log(t[i].event)
+            }
+            console.log("Name : "+event.summary)     
           } else {
             appendPre('No upcoming events found.');
           }
@@ -155,8 +157,8 @@
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     </script>
-<!--     <form action="#" method="post">
-      <input id="btn" type="submit" value="START">
-    </form> -->
+    <form action="timer.html">
+        <input type="submit" value="Start Timer"/>
+    </form>
   </body>
 </html>
