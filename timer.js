@@ -1,6 +1,13 @@
-function startTimer(duration,display) {
+function startTimer(duration, event) {
     var timer = duration, days, hours, minutes, second;
-
+    let id = event.summary + event.start.dateTime
+    id = id.replace(' ', '')
+    let container = `
+    
+    `
+    console.log(document.getElementById(`days${id}`))
+    document.getElementById("eventify-table").append(container)
+    console.log(container)
     var interval = setInterval(function () {
         days = parseInt((timer / (24*60*60)), 10);
         hours   = parseInt((timer / (60*60)) - (days*24), 10);
@@ -12,22 +19,24 @@ function startTimer(duration,display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        document.getElementById("mins").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("days").innerHTML = days;
+        document.getElementById(`mins${id}`).innerHTML = minutes;
+        document.getElementById(`seconds${id}`).innerHTML = seconds;
+        document.getElementById(`hours${id}`).innerHTML = hours;
+        document.getElementById(`days${id}`).innerHTML = days;
+
 
         if (--timer < 0) {
-            document.getElementById("up").innerHTML = "TIME UP";
-            document.getElementById("days").innerHTML = "00";
-            document.getElementById("hours").innerHTML = "00";
-            document.getElementById("mins").innerHTML = "00";
-            document.getElementById("seconds").innerHTML = "00";    
+            document.getElementById(`up${id}`).innerHTML = "TIME UP";
+            document.getElementById(`days${id}`).innerHTML = "00";
+            document.getElementById(`hours${id}`).innerHTML = "00";
+            document.getElementById(`mins${id}`).innerHTML = "00";
+            document.getElementById(`seconds${id}`).innerHTML = "00";    
             clearInterval(interval);
         } 
     }, 1000);
 }
 window.onload = function () {  
+    // document.getElementById("eventify-table").innerHTML = ""
     let arr2 = localStorage.getItem("arr")
     let t = JSON.parse(arr2 || [])
     // for(i = 0; i < t.length; i++)
@@ -51,13 +60,17 @@ window.onload = function () {
     var currSec = currTime.getTime();
     console.log(eventSec*0.001)
     console.log(currSec*0.001)
-    var remSec = eventSec-currSec
-    console.log(remSec*0.001)
+    var remSec = (eventSec-currSec)*0.001
+    console.log(remSec)
     var remSecInt = parseInt(remSec)
-    console.log(remSecInt*0.001)
+    console.log(remSecInt)  
+
+    // let t1_day = document.getElementsByClassName("days")[0]
+    // let t2_day = document.getElementsByClassName("days")[1]
+    // t1_day.innerHTML = "RANDOM"
+    // t2_day.innerHTML = "RANDOM"
 
     // var measure =(d*24*60*60) + (h*60*60) + (m*60) + s;
 
-    display = document.querySelector('#time');
-    startTimer(remSecInt,display);
+    // startTimer(remSecInt, t[0].event);
 };

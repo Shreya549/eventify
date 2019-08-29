@@ -1,17 +1,41 @@
 body{
     background: #f7f7f7;
 }
-.countdownContainer{
-    position: absolute;
+.countdownContainer1{
+/*    position: absolute;
     top: 50%;
     left: 50%;
-    transform : translateX(-50%) translateY(-50%);
+    transform : translateX(-50%) translateY(-50%);*/
     text-align: center;
     background: #edd;
     border: 1px solid #999;
     padding: 10px;
     box-shadow: 0 0 5px 3px #ccc;
+    border: solid black;
 }
+.countdownContainer2{
+    position: absolute;
+    left: 50%;
+    transform : translateX(-50%) translateY(-100%);
+    text-align: center;
+    background: #edd;
+    border: 1px solid #999;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+    border: solid black;
+}
+.countdownContainer3{
+    position: absolute;
+    right: -10%;
+    transform : translateX(-50%) translateY(-100%);
+    text-align: center;
+    background: #edd;
+    border: 1px solid #999;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+    border: solid black;
+}
+
 .resetContainer{
     position: absolute;
     top: 75%;
