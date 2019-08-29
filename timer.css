@@ -1,0 +1,56 @@
+body{
+    background: #f7f7f7;
+}
+.countdownContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform : translateX(-50%) translateY(-50%);
+    text-align: center;
+    background: #edd;
+    border: 1px solid #999;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+}
+.resetContainer{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform : translateX(-50%) translateY(-50%);
+    text-align: center;
+    text-align: center;
+    background: #edd;
+    border: 1px solid #999;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+    font-size: 40px;
+    font: #edd;
+    text-align: center;
+  }
+.info{
+    font-size: 80px;
+    font: #edd;
+    text-align: center;
+}
+.info2{
+    font-size: 20px;
+    font: #edd;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:link {
+    color: black;
+}
+a:visited {
+    color: black;
+}
+a:hover {
+    color: black;
+}
+a:active {
+    color: black;
+}
