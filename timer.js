@@ -37,25 +37,38 @@ function startTimer(event) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        d[i].innerHTML = days
-        h[i].innerHTML = hours
-        m[i].innerHTML = minutes
-        s[i].innerHTML = seconds
+            if (days < 0)
+                        days = 0;
+            if (hours < 0)
+                        hours = 0
+            if (minutes < 0)
+                    minutes = 0
+            if (seconds < 0)
+                        seconds = 0
+        if (parseInt(days)  == 0 && parseInt(hours) == 0 && parseInt(minutes) == 0 && parseInt(seconds) == 0) {
+                summary[i].innerHTML = "TIME UP!!"
+            }
+    console.log(seconds)
+        d[i].innerHTML = parseInt(days)
+        h[i].innerHTML = parseInt(hours)
+        m[i].innerHTML = parseInt(minutes)
+        s[i].innerHTML = parseInt(seconds)
 
 
-        if (--timer < 0) {
-            // document.getElementById(`up${id}`).innerHTML = "TIME UP";
-            // document.getElementById(`days${id}`).innerHTML = "00";
-            // document.getElementById(`hours${id}`).innerHTML = "00";
-            // document.getElementById(`mins${id}`).innerHTML = "00";
-            // document.getElementById(`seconds${id}`).innerHTML = "00";    
-             d[i].innerHTML = "00"
-        h[i].innerHTML = "00"
-        m[i].innerHTML = "00"
-        s[i].innerHTML = "00"
-        summary[i].innerHTML = "TIME UP!"
-            clearInterval(interval);
-        } 
+
+        // if (--timer < 0) {
+        //     // document.getElementById(`up${id}`).innerHTML = "TIME UP";
+        //     // document.getElementById(`days${id}`).innerHTML = "00";
+        //     // document.getElementById(`hours${id}`).innerHTML = "00";
+        //     // document.getElementById(`mins${id}`).innerHTML = "00";
+        //     // document.getElementById(`seconds${id}`).innerHTML = "00";    
+        //      d[i].innerHTML = "00"
+        // h[i].innerHTML = "00"
+        // m[i].innerHTML = "00"
+        // s[i].innerHTML = "00"
+        // summary[i].innerHTML = "TIME UP!"
+        //     //clearInterval(interval);
+        // } 
     }
     }, 1000);
 
