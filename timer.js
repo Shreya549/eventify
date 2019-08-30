@@ -1,14 +1,32 @@
-function startTimer(duration, event) {
-    var timer = duration, days, hours, minutes, second;
-    let id = event.summary + event.start.dateTime
-    id = id.replace(' ', '')
-    let container = `
-    
-    `
-    console.log(document.getElementById(`days${id}`))
-    document.getElementById("eventify-table").append(container)
-    console.log(container)
+function startTimer(event) {
+    var timer, days, hours, minutes, second;
+
+        let summary = document.getElementsByClassName("up")
+        let d = document.getElementsByClassName("days")
+        let h = document.getElementsByClassName("hours")
+        let m = document.getElementsByClassName("mins")
+        let s = document.getElementsByClassName("seconds")
+
+        for (let i in event) {
+            summary[i].innerHTML = event[i].event.summary
+        }
+
     var interval = setInterval(function () {
+        for (let i in event) 
+        {
+            var time = event[i].event.start.dateTime || event[i].event.start.date
+            console.log(time)
+            var eventTime = new Date(time);
+            console.log(eventTime)
+            var eventSec = eventTime.getTime();
+            var currTime = new Date();
+            var currSec = currTime.getTime();
+            console.log(eventSec*0.001)
+            console.log(currSec*0.001)
+            var remSec = (eventSec-currSec)*0.001
+            console.log(remSec)
+            var timer = parseInt(remSec)
+        
         days = parseInt((timer / (24*60*60)), 10);
         hours   = parseInt((timer / (60*60)) - (days*24), 10);
         minutes = parseInt((timer / (60)) - (hours*60) - (days*24*60), 10);
@@ -19,21 +37,28 @@ function startTimer(duration, event) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        document.getElementById(`mins${id}`).innerHTML = minutes;
-        document.getElementById(`seconds${id}`).innerHTML = seconds;
-        document.getElementById(`hours${id}`).innerHTML = hours;
-        document.getElementById(`days${id}`).innerHTML = days;
+        d[i].innerHTML = days
+        h[i].innerHTML = hours
+        m[i].innerHTML = minutes
+        s[i].innerHTML = seconds
 
 
         if (--timer < 0) {
-            document.getElementById(`up${id}`).innerHTML = "TIME UP";
-            document.getElementById(`days${id}`).innerHTML = "00";
-            document.getElementById(`hours${id}`).innerHTML = "00";
-            document.getElementById(`mins${id}`).innerHTML = "00";
-            document.getElementById(`seconds${id}`).innerHTML = "00";    
+            // document.getElementById(`up${id}`).innerHTML = "TIME UP";
+            // document.getElementById(`days${id}`).innerHTML = "00";
+            // document.getElementById(`hours${id}`).innerHTML = "00";
+            // document.getElementById(`mins${id}`).innerHTML = "00";
+            // document.getElementById(`seconds${id}`).innerHTML = "00";    
+             d[i].innerHTML = "00"
+        h[i].innerHTML = "00"
+        m[i].innerHTML = "00"
+        s[i].innerHTML = "00"
+        summary[i].innerHTML = "TIME UP!"
             clearInterval(interval);
         } 
+    }
     }, 1000);
+
 }
 window.onload = function () {  
     // document.getElementById("eventify-table").innerHTML = ""
@@ -43,34 +68,25 @@ window.onload = function () {
     // {
     //   console.log(t[i].event)
     // } 
-    console.log(t[0].event.summary)
-    console.log(t[0].event.start.dateTime)
 
-
-    // d = parseInt(d)
-    // h = parseInt(h)
-    // m = parseInt(m)
-    // s = parseInt(s)
-
-    var time = t[0].event.start.dateTime
-    console.log(time)
-    var eventTime = new Date(time);
-    var eventSec = eventTime.getTime();
-    var currTime = new Date();
-    var currSec = currTime.getTime();
-    console.log(eventSec*0.001)
-    console.log(currSec*0.001)
-    var remSec = (eventSec-currSec)*0.001
-    console.log(remSec)
-    var remSecInt = parseInt(remSec)
-    console.log(remSecInt)  
+    // var time = t[2].event.start.date
+    // console.log(time)
+    // var eventTime = new Date(time);
+    // console.log(eventTime)
+    // var eventSec = eventTime.getTime();
+    // var currTime = new Date();
+    // var currSec = currTime.getTime();
+    // console.log(eventSec*0.001)
+    // console.log(currSec*0.001)
+    // var remSec = (eventSec-currSec)*0.001
+    // console.log(remSec)
+    // var remSecInt = parseInt(remSec)
+    // console.log(remSecInt)  
 
     // let t1_day = document.getElementsByClassName("days")[0]
     // let t2_day = document.getElementsByClassName("days")[1]
     // t1_day.innerHTML = "RANDOM"
     // t2_day.innerHTML = "RANDOM"
 
-    // var measure =(d*24*60*60) + (h*60*60) + (m*60) + s;
-
-    // startTimer(remSecInt, t[0].event);
+    startTimer(t);
 };
