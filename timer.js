@@ -6,7 +6,9 @@ function startTimer(event) {
         let h = document.getElementsByClassName("hours")
         let m = document.getElementsByClassName("mins")
         let s = document.getElementsByClassName("seconds")
+        console.log(summary[0].innerHTML)
 
+        event = event.slice(0, 9)
         for (let i in event) {
             summary[i].innerHTML = event[i].event.summary
         }
@@ -15,16 +17,16 @@ function startTimer(event) {
         for (let i in event) 
         {
             var time = event[i].event.start.dateTime || event[i].event.start.date
-            console.log(time)
+            // console.log(time)
             var eventTime = new Date(time);
-            console.log(eventTime)
+            // console.log(eventTime)
             var eventSec = eventTime.getTime();
             var currTime = new Date();
             var currSec = currTime.getTime();
-            console.log(eventSec*0.001)
-            console.log(currSec*0.001)
+            // console.log(eventSec*0.001)
+            // console.log(currSec*0.001)
             var remSec = (eventSec-currSec)*0.001
-            console.log(remSec)
+            // console.log(remSec)
             var timer = parseInt(remSec)
         
         days = parseInt((timer / (24*60*60)), 10);
