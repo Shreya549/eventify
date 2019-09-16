@@ -23,14 +23,12 @@ app.get('/',function(req,res){
 
 app.listen(4080,function(){
   console.log("Listening to port 4080");
-})
-
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = './credentials.json';
+const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
 fs.readFile('credentials.json', (err, content) => {
@@ -45,16 +43,17 @@ fs.readFile('credentials.json', (err, content) => {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
       client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
-  let token = fs.readFileSync(TOKEN_PATH);
-  oAuth2Client.setCredentials(JSON.parse(token));
-  callback(oAuth2Client);
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client);
+  });
 }
 
 /**
@@ -63,7 +62,6 @@ function authorize(credentials, callback) {
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
  * @param {getEventsCallback} callback The callback for the authorized client.
  */
-
 function getAccessToken(oAuth2Client, callback) {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
@@ -74,7 +72,6 @@ function getAccessToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-
   rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
@@ -94,11 +91,8 @@ function getAccessToken(oAuth2Client, callback) {
  * Lists the next 10 events on the user's primary calendar.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-
 function listEvents(auth) {
   const calendar = google.calendar({version: 'v3', auth});
-  addEvents(auth, calendar); //add events
-  //removeEvents(auth, calendar); //remove events
   calendar.events.list({
     calendarId: 'primary',
     timeMin: (new Date()).toISOString(),
@@ -119,41 +113,5 @@ function listEvents(auth) {
     }
   });
 }
+})
 
-var event = {
-  'summary' : nam,
-  'start': {
-    'date': sd,
-  },
-  'end': {
-    'date': ed,
-  },
-  'recurrence': [
-    'RRULE:FREQ=DAILY;COUNT=2'
-  ],
-  'attendees': [
-    {'email': ['priyankkaushik13@gmail.com','shreyachatterjeeshreyash@gmail.com']},
-  ],
-  'reminders': {
-    'useDefault': false,
-    'overrides': [
-      {'method': 'email', 'minutes': 24 * 60},
-      {'method': 'popup', 'minutes': 10},
-    ],
-  },
-};
-
-//Add Events
-function addEvents(auth, calendar){
-  calendar.events.insert({
-    auth: auth,
-    calendarId: 'shreya.chatterjeeshreyash@gmail.com',
-    resource: event,
-  }, function(err, res) {
-    if (err) {
-      console.log('Error: ' + err);
-      return;
-    }
-    //console.log(res);
-  });
-} 
