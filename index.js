@@ -7,16 +7,14 @@ var app = express();
 var querystring = require('querystring');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
-var sd = new Date();
-var ed = new Date();
+var sd = new Date().toISOString(); 
+var ed = new Date().toISOString();
 var nam;
 app.get('/',function(req,res){
   res.sendFile(__dirname + "/form.html");
   console.log(req.query);
-  sd = new Date(req.query.sdate);
-  sd = sd.toDateString();
-  ed = new Date(req.query.edate);
-  ed = ed.toDateString();
+  sd = new Date(req.query.sdate).toISOString;
+  ed = new Date(req.query.edate).toISOString;
   nam = req.query.name;
   console.log(sd);
   console.log(ed);
@@ -151,4 +149,3 @@ function listEvents(auth, calendar) {
 app.listen(3000,function(){
   console.log("Listening to port 3000");
 })
-
