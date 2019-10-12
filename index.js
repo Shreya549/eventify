@@ -149,6 +149,6 @@ function listEvents(auth, calendar) {
 }
 })
 app.listen(3000,function(){
-  console.log("Listening to port 3001");
+  console.log("Listening to port 3000");
 })
 
