@@ -1,1 +1,1 @@
-# eventify
+# Eventify
