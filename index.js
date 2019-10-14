@@ -13,15 +13,11 @@ var nam;
 app.get('/',function(req,res){
   res.sendFile(__dirname + "/form.html");
   console.log(req.query);
-<<<<<<< HEAD
   sd = new Date(req.query.sdate);
   sd = sd.toDateString();
   ed = new Date(req.query.edate);
   ed = ed.toDateString();
-=======
-  sd = new Date(req.query.sdate).toISOString;
-  ed = new Date(req.query.edate).toISOString;
->>>>>>> 9b44acd69c528907a45674831f61bfb5f8cfcf60
+
   nam = req.query.name;
   console.log(sd);
   console.log(ed);
@@ -157,6 +153,9 @@ app.listen(3000,function(){
   console.log("Listening to port 3000");
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 9b44acd69c528907a45674831f61bfb5f8cfcf60
+=======
+>>>>>>> 72dfe59a19e805906e726d9190f56cb94c393355
