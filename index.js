@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({extended:false}))
 var sd = new Date().toISOString(); 
 var ed = new Date().toISOString();
 var nam;
-app.get('/',function(req,res){
+app.get("/add", (req, res) => {
   res.sendFile(__dirname + "/form.html");
+})
+app.get('/',function(req,res){
+
   console.log(req.query);
   sd = new Date(req.query.sdate);
   sd = sd.toDateString();
@@ -152,10 +155,3 @@ function listEvents(auth, calendar) {
 app.listen(3000,function(){
   console.log("Listening to port 3000");
 })
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 9b44acd69c528907a45674831f61bfb5f8cfcf60
-=======
->>>>>>> 72dfe59a19e805906e726d9190f56cb94c393355
