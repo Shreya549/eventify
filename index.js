@@ -90,10 +90,12 @@ app.get('/add',function(req,res){
 var event = {
   'summary' : 'DevJams',
   'start': {
-    'date': '20-10-2019T00:00:00+05:30',
+    'dateTime': '2019-10-20T00:00:00+05:30',
+    'timeZone': 'India'
   },
   'end': {
-    'date': '22-10-2019T00:00:00+05:30',
+    'dateTime': '2019-10-22T00:00:00+05:30',
+    'timeZone': 'India'
   },
   'recurrence': [
     'RRULE:FREQ=DAILY;COUNT=2'
