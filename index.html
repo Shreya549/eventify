@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Google Calendar API Quickstart</title>
+    <title>Eventify - Home</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style type="text/css">
+    .log_position{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .start_postion{
+      position: absolute;
+      top: 100PX;
+      right: 50px;
+    }
+    .startTimer{
+      position: absolute;
+      right: 50%;
+    }
+  </style>
   <body>
-    <p>Google Calendar API Quickstart</p>
+    <p><h1 align=center>Eventify</h1></p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+    <button id="authorize_button" style="display: none;" class="btn btn-light log_position">Authorize</button>
+    <button id="signout_button" style="display: none;" class="btn btn-danger log_position">Sign Out</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -116,16 +134,45 @@
           localStorage["arr"] = []
           let arr = []
           var events = response.result.items;
-          appendPre('Upcoming events:');
+          // appendPre('Upcoming events:');
 
           if (events.length > 0) {
+              // var table = document.getElementById("myTable");
+              // var row = table.insertRow(0);
+
+              // var cell0 = row.insertCell(0);
+              // var cell1 = row.insertCell(1);
+              // var cell2 = row.insertCell(2);
+              // var cell3 = row.insertCell(0); 
+
+              // cell0.innerHTML = "S.No.";   
+              // cell1.innerHTML = "Event Name";
+              // cell2.innerHTML = "Event Date";
+              // cell3.innerHTML = "Check"
+
+
             for (i = 0; i < events.length; i++) {
               var event = events[i];
               var when = event.start.dateTime;
               if (!when) {
                 when = event.start.date;
               }
-              appendPre(event.summary + ' (' + when + ')')
+              
+              var table = document.getElementById("myTable");
+              var row = table.insertRow(i+1);
+
+              var cell0 = row.insertCell(0);
+              var cell1 = row.insertCell(1);
+              var cell2 = row.insertCell(2);
+              var cell3 = row.insertCell(0); 
+
+              cell0.innerHTML = i+1;   
+              cell1.innerHTML = event.summary;
+              cell2.innerHTML = when;
+              var x = document.createElement("INPUT");
+              x.setAttribute("type", "checkbox");
+              cell3.appendChild(x);
+  
               // var myDate = new Date(when);
               // var date = myDate.getTime();
               arr.push({
@@ -157,8 +204,33 @@
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     </script>
+    <table id="myTable" class="table" >
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Check</th>
+          <th scope="col">#</th>
+          <th scope="col">Event Name</th>
+          <th scope="col">Event Date</th>
+        </tr>
+      </thead>
+<!--    <tr>
+      <td>Row1 cell1</td>
+      <td>Row1 cell2</td>
+    </tr>
+    <tr>
+      <td>Row2 cell1</td>
+      <td>Row2 cell2</td>
+    </tr>
+    <tr>
+      <td>Row3 cell1</td>
+      <td>Row3 cell2</td>
+    </tr> -->
+  </table> 
     <form action="timer.html">
-        <input type="submit" value="Start Timer"/>
+        <input type="submit" value="Start Timer" class="btn btn-dark startTimer" />
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>

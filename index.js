@@ -21,6 +21,16 @@ app.get('/add',function(req,res){
   //console.log(sd);
   //console.log(ed);
   // Load client secrets from a local file.
+  console.log(req.query);
+  sd = new Date(req.query.sdate);
+  sd = sd.toDateString();
+  ed = new Date(req.query.edate);
+  ed = ed.toDateString();
+
+  nam = req.query.name;
+  console.log(sd);
+  console.log(ed);
+     // Load client secrets from a local file.
      fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Calendar API.
