@@ -10,16 +10,18 @@ app.use(bodyParser.urlencoded({extended:false}))
 var sd = new Date().toISOString(); 
 var ed = new Date().toISOString();
 var nam;
-app.get('/add',function(req,res){
+app.get('/addEvents', function(req, res){
   res.sendFile(__dirname + "/form.html");
-  //console.log(req.query);
-  //sd = new Date(req.query.sdate);
+})
+app.get('/add',function(req,res){
+  console.log(req.query);
+  sd = req.query.sdate+"T00:00:00+05:30";
   //sd = sd.toDateString();
-  //ed = new Date(req.query.edate);
+  ed = req.query.edate+"T00:00:00+05:30";
   //ed = ed.toDateString();
-  //nam = req.query.name;
-  //console.log(sd);
-  //console.log(ed);
+  nam = req.query.name;
+  console.log(sd);
+  console.log(ed);
   // Load client secrets from a local file.
      fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
@@ -88,13 +90,13 @@ app.get('/add',function(req,res){
  */
 
 var event = {
-  'summary' : 'Recruitments',
+  'summary' : nam,
   'start': {
-    'dateTime': '2019-12-11T00:00:00+05:30',
+    'dateTime': sd,
     'timeZone' : 'Asia/Kolkata'
   },
   'end': {
-    'dateTime': '2019-12-12T00:00:00+05:30',
+    'dateTime': ed,
     'timeZone' : 'Asia/Kolkata'
   },
   'recurrence': [
